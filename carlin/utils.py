@@ -99,7 +99,7 @@ def get_index_from_key(key, j, n):
     x_power_j = kron_power(x, j)
 
     for i, monomial in enumerate(x_power_j):
-        if ( list(monomial.dict().keys()[0]) == key):
+        if list(monomial.dict().keys())[0] == key:
             first_occurence = i
             break
 
