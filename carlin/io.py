@@ -188,21 +188,26 @@ def get_Fj_from_model(model_filename=None, f=None, n=None, k=None):
         from carlin.transformation import get_index_from_key
         
         for i, dictionary_f_i in enumerate(dictionary_f):
-            for key in dictionary_f_i:
-                row = i;
+            for key, value in dictionary_f_i.items():
+                row = i
                 j = sum(key)
                 column = get_index_from_key(list(key), j, n)
-                F[j-1].update({tuple([row,column]): dictionary_f_i.get(key)})
+                F[j-1][(row, column)] = value
 
     elif (n==1):
         #the scalar case is treated separately. the problem arises from using
         #sum(1) (note it doesn't break if one uses from scipy import sum)
         for i, dictionary_f_i in enumerate(dictionary_f):
-            for key in dictionary_f_i:
-                row = i;
+            for key, value in dictionary_f_i.items():
+                row = i
                 j = key
-                column = 0 # because Fj are 1x1 in the scalar case
-                F[j-1].update({tuple([row,column]): dictionary_f_i.get(key)})
+                column = 0  # because Fj are 1x1 in the scalar case
+        
+                # Create a dictionary with the update
+                update_dict = {(row, column): value}
+        
+                # Update the corresponding DOK matrix with the dictionary
+                F[int(j) - 1].update(update_dict)
 
     return F, n, k
 
