@@ -473,13 +473,13 @@ def linearize(model, target_filename, N, x0, **kwargs):
 
     dic['AN'] = A_N
 
-    print 'Computing the quadratic reduction...',
+    print('Computing the quadratic reduction...')
     [Fquad, nquad, kquad] = quadratic_reduction(F, n, k)
-    print 'done'
+    print('done')
 
-    print 'Computing the characteristics of the model...',
+    print('Computing the characteristics of the model...')
     ch = characteristics(Fquad, nquad, kquad);
-    print 'done'
+    print('done')
 
     norm_F1_tilde = ch['norm_Fi_inf'][0]
     norm_F2_tilde = ch['norm_Fi_inf'][1]
@@ -554,9 +554,9 @@ def linearize(model, target_filename, N, x0, **kwargs):
                 new_key = new_data.pop('name')
                 dic[new_key] = new_data
 
-    print 'Exporting to ', target_filename, '...',
+    print('Exporting to ', target_filename)
     savemat(target_filename, dic)
-    print 'done'
+    print('done')
 
     return
 
