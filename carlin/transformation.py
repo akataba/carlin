@@ -453,23 +453,23 @@ def linearize(model, target_filename, N, x0, **kwargs):
     dic['model_name'] = model
     dic['N'] = N
 
-    print 'Obtaining the canonical representation...',
+    print('Obtaining the canonical representation...')
 
     if isinstance(model, str):
         [F, n, k] = get_Fj_from_model(model)
     elif isinstance(model, PolynomialODE):
         [F, n, k] = get_Fj_from_model(model.funcs(), model.dim(), model.degree())
-    print 'done'
+    print('done')
 
     dic['n'] = n
     dic['k'] = k
 
-    print 'Computing matrix AN...',
+    print('Computing matrix AN...')
     if isinstance(model, str):
         A_N = truncated_matrix(N, model)
     elif isinstance(model, PolynomialODE):
         A_N = truncated_matrix(N, F, n, k, input_format="Fj_matrices")
-    print 'done'
+    print('done')
 
     dic['AN'] = A_N
 
