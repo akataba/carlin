@@ -23,6 +23,7 @@ from sage.rings.polynomial.polynomial_ring import polygens
 from sage.modules.free_module_element import vector
 from sage.functions.other import real_part, imag_part
 from sage.functions.log import log, exp
+from sage.rings.polynomial.polydict import ETuple
 
 #===============================================
 # Kronecker operations
@@ -95,11 +96,12 @@ def get_index_from_key(key, j, n):
         sage: get_index_from_key([1, 1], 2, 2)
         1
     """
+    key_as_ETuple = ETuple(key)
     x = polygens(QQ, ['x'+str(1+k) for k in range(n)])
     x_power_j = kron_power(x, j)
 
     for i, monomial in enumerate(x_power_j):
-        if list(monomial.dict().keys())[0] == key:
+        if list(monomial.dict().keys())[0] == key_as_ETuple:
             first_occurence = i
             break
 
