@@ -67,7 +67,7 @@ from sage.rings.all import RR, QQ
 from sage.rings.real_double import RDF
 from sage.rings.polynomial.polynomial_ring import polygens 
 from sage.modules.free_module_element import vector
-
+import scipy.io
 from carlin.utils import kron_power, lift
 
 #==========================
@@ -91,14 +91,9 @@ def load_model(model_filename):
 
     - ``k`` -- integer, degree of f
     """
-    from sage.structure.sage_object import load
     
-    # should define n and f
-    load(model_filename)
-
-    k = max( [fi.degree() for fi in f] )
-
-    return [f, n, k]
+    model = scipy.io.loadmat(model_filename)
+    return model
 
 def get_Fj_from_model(model_filename=None, f=None, n=None, k=None):
     r"""
